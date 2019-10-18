@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axiosWithAuth from "./axiosWithAuth";
+import "./bubble.css";
 
 // username: Lambda School
 // password: i<3Lambd4
@@ -28,24 +29,29 @@ const Login = (props) => {
   };
   return (
     <>
-    <p>Build a login page here</p>
-
-    <form onSubmit={handleSubmit}>
-      <input
+    <form  className="form" onSubmit={handleSubmit}>
+      <h1>Login</h1>
+      <div className="maindiv">
+        <div>
+      <input className="input"
         type="type"
         name="username"
         placeholder="Username"
         onChange={handleChange}
         value={creds.username}
       />
-      <input
+      </div>
+      <div>
+      <input className="input"
         type="password"
         name="password"
         placeholder="Password"
         onChange={handleChange}
         value={creds.password}
       />
-      <button type="submit">Log In</button>
+      </div>
+      </div>
+      <button  className="buttons" type="submit">Log In</button>
     </form>
   </>
   );
