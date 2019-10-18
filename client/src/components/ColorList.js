@@ -15,33 +15,48 @@ const ColorList = ({ colors, updateColors }) => {
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    
   };
 
-  const saveEdit = (e ,color)=> {
+  const saveEdit = (e, color) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
     axiosWithAuth()
-    .put(`/colors/${colorToEdit.id}`, colorToEdit)
-    .then(res => {
-      updateColors(colors.filter(el => el.id !== color.id));
-    })
-    .catch(err => console.log(err));
-  window.location.href = window.location.href;
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        updateColors(colors.filter(el => el.id !== color.id));
+      })
+      .catch(err => console.log(err));
+    window.location.href = window.location.href;
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
     console.log(color);
     axiosWithAuth()
-    .delete(`/colors/${color.id}`)
-    .then(res => {
-      updateColors(colors.filter(el => el.id !== color.id));
-    })
-    .catch(err => console.log(err));
-
+      .delete(`/colors/${color.id}`)
+      .then(res => {
+        updateColors(colors.filter(el => el.id !== color.id));
+      })
+      .catch(err => console.log(err));
   };
+
+  const addColor = e => {
+    e.preventDefault();
+    axiosWithAuth()
+    .post("/colors", colorToAdd)
+    .then(res => {
+      updateColors(res.data);
+      setColorToAdd({
+        color: "",
+        code: { hex: "" }
+      })
+      
+    })
+
+  }
 
   return (
     <div className="colors-wrap">
@@ -95,7 +110,7 @@ const ColorList = ({ colors, updateColors }) => {
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
 
-      <form >
+      <form onSubmit={addColor}>
         <legend>Add color</legend>
         <label>
           color name:
