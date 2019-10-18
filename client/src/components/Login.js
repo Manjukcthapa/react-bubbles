@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import axios from "axios";
+import axiosWithAuth from "./axiosWithAuth";
 
 // username: Lambda School
 // password: i<3Lambd4
@@ -16,8 +16,8 @@ const Login = (props) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    axios
-      .post("http://localhost:5000/api/login", creds)
+    axiosWithAuth()
+      .post("/login", creds)
       .then(res => {
         console.log(res)
         localStorage.setItem("token", res.data.payload);
