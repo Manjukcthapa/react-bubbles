@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "./axiosWithAuth";
+import "./bubble.css";
 
 const initialColor = {
   color: "",
@@ -107,10 +108,10 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
+     
       {/* stretch - build another form here to add a color */}
 
-      <form onSubmit={addColor}>
+      <form className="addForm" onSubmit={addColor}>
         <legend>Add color</legend>
         <label>
           color name:
